@@ -63,6 +63,7 @@ def get_pdf_url(input_no):
     id_input.clear()
     
     # Enter file number into field
+    id_input.send_keys(input_no)
     
     # Press RETURN, submitting form
     id_input.send_keys(Keys.RETURN)
