@@ -1,3 +1,4 @@
+import sys
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -51,7 +52,7 @@ def download_file(input_no):
     
 def get_pdf_url(input_no):
      # Inintiate browser
-    driver = webdriver.Firefox()
+    driver = webdriver.Chrome()
     
     # Load browser with GLO database page
     driver.get("http://www.glo.texas.gov/history/archives/land-grants/index.cfm")
@@ -77,4 +78,8 @@ def get_pdf_url(input_no):
         pdf = driver.find_element_by_link_text('pdf')
         # Open pdf 
         return pdf.get_attribute('href')
-    
+        print(pdf.get_attribute('href'))
+        driver.close()
+
+if __name__ == "__main__":
+    get_pdf_url(sys.argv[1])    
