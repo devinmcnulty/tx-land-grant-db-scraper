@@ -81,7 +81,7 @@ def get_pdf_url(input_no):
         pdf = driver.find_element_by_link_text('pdf')
         # Open pdf 
         #return pdf.get_attribute('href')
-        print(pdf.get_attribute('href'))
+        pdf.get_attribute('href')
         driver.close()
 
 if __name__ == "__main__":
