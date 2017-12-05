@@ -1,6 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
-import sys
+from pyvirtualdisplay import Display
+import sys, os
+#sys.path.insert(0, "/usr/local/lib/python3.5/dist-packages")
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -54,11 +56,17 @@ def download_file(input_no):
     
 def get_pdf_url(input_no):
      # Inintiate browser
+    #print("Opening display")
+    display = Display(visible=0, size=[800, 600])
+    display.start()
+    # Set the MOZ_HEADLESS environment variable which casues Firefox to start in headless mode.
+    os.environ['MOZ_HEADLESS'] = '1'
+    #print("Initiating browser")
     driver = webdriver.Firefox()
-    
+    #print("Gettin page")
     # Load browser with GLO database page
     driver.get("http://www.glo.texas.gov/history/archives/land-grants/index.cfm")
-    
+    #print("Entering input")
     # Find file number input field
     id_input = driver.find_element_by_name("sFileNo")
     
@@ -67,10 +75,10 @@ def get_pdf_url(input_no):
     
     # Enter file number into field
     id_input.send_keys(input_no)
-    
+    #print("Submitting input")
     # Press RETURN, submitting form
     id_input.send_keys(Keys.RETURN)
-    
+    #print("Trying to locate pdf link")
     # Try to locate pdf link until page loaded    
     try:
         element = WebDriverWait(driver, 10).until(
@@ -78,11 +86,11 @@ def get_pdf_url(input_no):
         )
     finally:
         # Find pdf
+        #print("Pdf link found")
         pdf = driver.find_element_by_link_text('pdf')
         # Open pdf 
         #return pdf.get_attribute('href')
-        pdf.get_attribute('href')
-        driver.close()
+        print(pdf.get_attribute('href'))
+    driver.close()
 
-if __name__ == "__main__":
-    get_pdf_url(sys.argv[1])    
+get_pdf_url(sys.argv[1])    
