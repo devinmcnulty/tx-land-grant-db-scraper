@@ -9,3 +9,4 @@ pennsylvania/ie.py
 pennsylvania/IEDriverServer.exe
 files.csv
 pennsylvania/merge.py
+*.exe

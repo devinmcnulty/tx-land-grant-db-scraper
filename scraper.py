@@ -98,8 +98,9 @@ def get_pdf_url(input_no):
 def download_files(first, last):
     # CSV file with one column of file numbers
     df = pd.read_csv("OneDrive/Documents/Work/TX Project/r10.csv")
-    for n in range(first, last+1):
-        file_no = int(df.ix[n][0])
+    length = last - first
+    for n in range(length):
+        file_no = int(df.ix[last -n-1][0])
         print("Downloading " + str(file_no))
         download_file(file_no)
  
